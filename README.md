@@ -4,8 +4,7 @@ ANalyses associated with the manuscript "Marine Phanerozoic biodiversity increas
 
 Contact: A.T.Cribb@soton.ac.uk
 
-<img src="https://img.shields.io/badge/README%20is%20under%20construction-ff5400"> 
-<img src="https://img.shields.io/badge/unpublished:-in_prep-7678ed">
+<img src="https://img.shields.io/badge/README%20is%20under%20construction-ff5400"> <img src="https://img.shields.io/badge/unpublished:-in_prep-7678ed">
 
 This repository contains all data and R scripts neede to reproduce the analyses and figures in the manuscript main text and suppelementary materials. You should run the analyses to generate new Output files in the Output folder created here. If you download this repository, set it as your working directory and everything should run smoothly. Should you have any questions or problems, or if you wish to make modifications for your own publication, please contact me at the email address above.
 
