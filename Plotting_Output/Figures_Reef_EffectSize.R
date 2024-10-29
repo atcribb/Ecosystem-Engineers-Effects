@@ -18,11 +18,15 @@ library(tidyr)
 library(RColorBrewer)
 
 effectsize_theme <- theme(
+  panel.border=element_rect(fill=NA, colour='black'),
   legend.position="inside",
-  legend.position.inside=c(0.9, 0.9),
+  legend.position.inside=c(0.87, 0.8),
   legend.title=element_blank(),
+  legend.text=element_text(size=8),
+  legend.background=element_rect(fill=NA, colour=NA),
   plot.title=element_text(hjust=0.5),
-  axis.text = element_text(color = "black"),
+  axis.text = element_text(color = "black", size=8),
+  axis.title = element_text(size=10),
   axis.line.x = element_blank())
 
 #==== load data ====#
@@ -55,14 +59,13 @@ compare_richness_plot <- ggplot(data=compare_richness) +
                     color=formations),
                 width=5) +
   geom_line(aes(x=mid_ma, y=richness, colour=formations)) +
-  geom_point(aes(x=mid_ma, y=richness, fill=formations), colour='black', size=3, pch=21) +
+  geom_point(aes(x=mid_ma, y=richness, fill=formations), colour='black', size=2.5, pch=21) +
   scale_fill_manual(values=compare.forms.cols) +
   scale_colour_manual(values=compare.forms.cols) +
   scale_x_reverse(limits=c(538,-5), name='Time (mya)') +
   scale_y_continuous(limits=c(0,14), name="Generic Richness") +
-  ggtitle('Comparison of Generic Richness') +
-  coord_geo(pos="bottom", dat='periods', size='auto', abbrv=FALSE, height=unit(1,'line')) +
-  annotate("text", x=530, y=13.5, label="A", size=5) +
+  coord_geo(pos='bottom', dat='periods', size=3, abbrv=TRUE, height=unit(1,'line')) +
+  annotate("text", x=530, y=13.5, label="A", size=3) +
   theme_classic() +
   effectsize_theme
 compare_richness_plot  
@@ -72,9 +75,9 @@ results_df$genrich_lowerbound <- abs(results_df$HedgesG_genrich) - results_df$g_
 results_df$genrich_significance <- rep(NA, nrow(results_df))
 results_df[which(abs(results_df$genrich_lowerbound) < 0.2),'genrich_significance'] <- 'no effect'
 results_df[which( abs(results_df$genrich_lowerbound) >= 0.2 & abs(results_df$genrich_lowerbound) < 0.5),'genrich_significance'] <- 'weak effect'
-results_df[which( abs(results_df$genrich_lowerbound) >= 0.5 & abs(results_df$genrich_lowerbound) < 0.8),'genrich_significance'] <- 'medium effect'
+results_df[which( abs(results_df$genrich_lowerbound) >= 0.5 & abs(results_df$genrich_lowerbound) < 0.8),'genrich_significance'] <- 'moderate effect'
 results_df[which( abs(results_df$genrich_lowerbound) >= 0.8),'genrich_significance'] <- 'strong effect'
-results_df$genrich_significance <- factor(results_df$genrich_significance, levels=c('no effect', 'weak effect', 'medium effect', 'strong effect'))
+results_df$genrich_significance <- factor(results_df$genrich_significance, levels=c('no effect', 'weak effect', 'moderate effect', 'strong effect'))
 
 
 effectsize_richness_plot <- ggplot(data=subset(results_df, !is.na(HedgesG_genrich))) +
@@ -84,22 +87,25 @@ effectsize_richness_plot <- ggplot(data=subset(results_df, !is.na(HedgesG_genric
   geom_errorbar(aes(x=mid_ma, ymin=HedgesG_genrich-g_genrich_sd,
                     ymax=HedgesG_genrich+g_genrich_sd),
                 width=8) +
+  geom_line(aes(x=mid_ma, y=HedgesG_genrich), size=0.4) +
   geom_point(aes(x=mid_ma, y=HedgesG_genrich, size=genrich_significance), fill='white', shape=21) +
   geom_point(aes(x=mid_ma, y=HedgesG_genrich, fill=period, alpha=genrich_significance, size=genrich_significance), shape=21) +
-  scale_size_manual(values=c(2,3,4,5)) +
+  scale_size_manual(values=c(1, 1.5, 2, 2.75)) +
   scale_alpha_manual(values=c(0.1, 0.3, 0.7, 1.0)) +
   scale_fill_manual(values=period.cols) +
   scale_x_reverse(limits=c(538,-5), name='Time (mya)') +
   scale_y_continuous(limits=c(-1.2,2.5), name=expression(paste("Hedges' g (\u00b11",sigma,")"))) +
   guides(fill='none') +
-  ggtitle('Reef-builder Effect Size: Generic Richness') +
-  coord_geo(pos='bottom', dat='periods', size='auto', abbrv=FALSE, height=unit(1,'line')) +
-  annotate("text", x=530, y=2.3, label="B", size=5) +
+  coord_geo(pos='bottom', dat='periods', size=3, abbrv=TRUE, height=unit(1,'line')) +
+  annotate("text", x=530, y=2.3, label="B", size=3) +
   theme_classic() +
   effectsize_theme
 effectsize_richness_plot  
 
-full_richness_fig <- ggarrange2(compare_richness_plot, effectsize_richness_plot, ncol=1)
+Figure3 <- ggarrange2(compare_richness_plot, effectsize_richness_plot, ncol=1)
+ggsave(filename='Draft/Figures/Figure3_reef_effectsize_richness.pdf', Figure3,
+       width=166, height=140, unit='mm')
+
 
 #Shannon's Diversity
 #restructure M1 vs M2 data
@@ -120,14 +126,13 @@ compare_H_plot <- ggplot(data=compare_H) +
                     color=formations),
                 width=5) +
   geom_line(aes(x=mid_ma, y=H, colour=formations)) +
-  geom_point(aes(x=mid_ma, y=H, fill=formations), colour='black', size=3, pch=21) +
+  geom_point(aes(x=mid_ma, y=H, fill=formations), colour='black', size=2.5, pch=21) +
   scale_fill_manual(values=compare.forms.cols) +
   scale_colour_manual(values=compare.forms.cols) +
   scale_x_reverse(limits=c(538,-5), name='Time (mya)') +
   scale_y_continuous(limits=c(0,2.5), name="Shannon's Diversity (H)") +
-  ggtitle("Comparison of Shannon's Diversity") +
-  coord_geo(pos="bottom", dat='periods', size='auto', abbrv=FALSE, height=unit(1,'line')) +
-  annotate("text", x=530, y=2.45, label="A", size=5) +
+  coord_geo(pos='bottom', dat='periods', size=3, abbrv=TRUE, height=unit(1,'line')) +
+  annotate("text", x=530, y=2.4, label="A", size=3) +
   theme_classic() +
   effectsize_theme
 compare_H_plot  
@@ -138,9 +143,9 @@ results_df$H_lowerbound <- abs(results_df$HedgesG_H) - results_df$g_H_sd
 results_df$H_significance <- rep(NA, nrow(results_df))
 results_df[which(abs(results_df$H_lowerbound) < 0.2),'H_significance'] <- 'no effect'
 results_df[which( abs(results_df$H_lowerbound) >= 0.2 & abs(results_df$H_lowerbound) < 0.5),'H_significance'] <- 'weak effect'
-results_df[which( abs(results_df$H_lowerbound) >= 0.5 & abs(results_df$H_lowerbound) < 0.8),'H_significance'] <- 'medium effect'
+results_df[which( abs(results_df$H_lowerbound) >= 0.5 & abs(results_df$H_lowerbound) < 0.8),'H_significance'] <- 'moderate effect'
 results_df[which( abs(results_df$H_lowerbound) >= 0.8),'H_significance'] <- 'strong effect'
-results_df$H_significance <- factor(results_df$H_significance, levels=c('no effect', 'weak effect', 'medium effect' , 'strong effect'))
+results_df$H_significance <- factor(results_df$H_significance, levels=c('no effect', 'weak effect', 'moderate effect' , 'strong effect'))
 
 effectsize_H_plot <- ggplot(data=subset(results_df, !is.na(HedgesG_H))) +
   geom_hline(yintercept=c(-0.2,0.2), linetype='longdash', linewidth=0.5, color='gray70') +
@@ -149,80 +154,21 @@ effectsize_H_plot <- ggplot(data=subset(results_df, !is.na(HedgesG_H))) +
   geom_errorbar(aes(x=mid_ma, ymin=HedgesG_H-g_H_sd,
                     ymax=HedgesG_H+g_H_sd),
                 width=8) +
+  geom_line(aes(x=mid_ma, y=HedgesG_H), size=0.4) +
   geom_point(aes(x=mid_ma, y=HedgesG_H, size=H_significance), fill='white', shape=21) +
   geom_point(aes(x=mid_ma, y=HedgesG_H, fill=period, alpha=H_significance, size=H_significance), shape=21) +
-  scale_size_manual(values=c(2,3,4,5)) +
+  scale_size_manual(values=c(1, 1.5, 2, 2.75)) +
   scale_alpha_manual(values=c(0.1, 0.3, 0.7, 1.0)) +
   scale_fill_manual(values=period.cols) +
   scale_x_reverse(limits=c(538,-5), name='Time (mya)') +
   scale_y_continuous(limits=c(-1.2,2.5), name=expression(paste("Hedges' g (\u00b11",sigma,")"))) +
   guides(fill='none') +
-  ggtitle('Reef-builder Effect Size: Shannons Diversity') +
-  coord_geo(pos='bottom', dat='periods', size='auto', abbrv=FALSE, height=unit(1,'line')) +
-  annotate("text", x=530, y=2.2, label="B", size=5) +
+  coord_geo(pos='bottom', dat='periods', size=3, abbrv=TRUE, height=unit(1,'line')) +
+  annotate("text", x=530, y=2.2, label="B", size=3) +
   theme_classic() +
   effectsize_theme
 effectsize_H_plot  
 
-full_H_fig <- ggarrange2(compare_H_plot, effectsize_H_plot, ncol=1)
-
-#Simpson's Dominance
-#restructure M1 vs M2 data
-m1_dom <- results_df[,c(1:3,18:19)]
-colnames(m1_dom) <- c('period', 'stage', 'mid_ma', 'dom', 'sd')
-m1_dom$formations <- 'Reef-builders present'
-m2_dom <- results_df[,c(1:3,20:21)]
-colnames(m2_dom) <- c('period', 'stage', 'mid_ma', 'dom', 'sd')
-m2_dom$formations <- 'Reef-builders absent'
-compare_dom <- rbind(m1_dom, m2_dom)
-
-compare.forms.cols <- c('#A03544', '#B19398')
-compare_dom$formations <- factor(compare_dom$formations, 
-                                 levels=c('Reef-builders present', 'Reef-builders absent'))
-
-compare_dom_plot <- ggplot(data=compare_dom) +
-  geom_errorbar(aes(x=mid_ma, ymin=dom-sd, ymax=dom+sd, 
-                    color=formations),
-                width=5) +
-  geom_line(aes(x=mid_ma, y=dom, colour=formations)) +
-  geom_point(aes(x=mid_ma, y=dom, fill=formations), colour='black', size=3, pch=21) +
-  scale_fill_manual(values=compare.forms.cols) +
-  scale_colour_manual(values=compare.forms.cols) +
-  scale_x_reverse(limits=c(538,-5), name='Time (mya)') +
-  scale_y_continuous(name="Simpson's Dominance (1/D)") +
-  ggtitle("Comparison of Simpson's Dominance") +
-  coord_geo(pos="bottom", dat='periods', size='auto', abbrv=FALSE, height=unit(1,'line')) +
-  theme_classic() +
-  effectsize_theme
-compare_dom_plot 
-
-results_df$dominance_lowerbound <- abs(results_df$HedgesG_Dominance) - results_df$g_dom_sd
-results_df$dominance_significance <- rep(NA, nrow(results_df))
-results_df[which(abs(results_df$dominance_lowerbound) < 0.2),'dominance_significance'] <- 'no effect'
-results_df[which(abs(results_df$dominance_lowerbound) >= 0.2 & abs(results_df$dominance_lowerbound) < 0.5),'dominance_significance'] <- 'weak effect'
-results_df[which(abs(results_df$dominance_lowerbound) >= 0.5 & abs(results_df$dominance_lowerbound) < 0.8),'dominance_significance'] <- 'medium effect'
-results_df[which(abs(results_df$dominance_lowerbound) >= 0.8),'dominance_significance'] <- 'strong effect'
-results_df$dominance_significance <- factor(results_df$dominance_significance, levels=c('no effect', 'weak effect', 'medium effect', 'strong effect'))
-
-effectsize_dom_plot <- ggplot(data=subset(results_df, !is.na(HedgesG_Dominance))) +
-  geom_hline(yintercept=c(-0.2,0.2), linetype='longdash', linewidth=0.5, color='gray70') +
-  geom_hline(yintercept=c(-0.5,0.5), linetype='longdash', linewidth=0.5, color='gray50') +
-  geom_hline(yintercept=c(-0.8,0.8), linetype='longdash', linewidth=0.5, color='gray30') +
-  geom_errorbar(aes(x=mid_ma, ymin=HedgesG_Dominance-g_dom_sd,
-                    ymax=HedgesG_Dominance+g_dom_sd),
-                width=8) +
-  geom_point(aes(x=mid_ma, y=HedgesG_Dominance, size=dominance_significance), fill='white', shape=21) +
-  geom_point(aes(x=mid_ma, y=HedgesG_Dominance, fill=period, alpha=dominance_significance, size=dominance_significance), shape=21) +
-  scale_fill_manual(values=period.cols) +
-  scale_size_manual(values=c(2, 2.4, 3.2, 3.6)) +
-  scale_alpha_manual(values=c(0.1, 0.3, 0.7, 1.0)) +
-  scale_x_reverse(limits=c(538,-5), name='Time (mya)') +
-  scale_y_continuous(limits=c(-1,2.5), name=expression(paste("Hedges' g (\u00b11",sigma,")"))) +
-  guides(fill='none') +
-  ggtitle("Reef-builder Effect Size: Simpson's Dominance") +
-  coord_geo(pos='bottom', dat='periods', size='auto', abbrv=FALSE, height=unit(1,'line')) +
-  theme_classic() +
-  effectsize_theme
-effectsize_dom_plot  
-
-full_dominance_fig <- ggarrange2(compare_dom_plot, effectsize_dom_plot, ncol=1)
+Figure4 <- ggarrange2(compare_H_plot, effectsize_H_plot, ncol=1)
+ggsave(filename='Draft/Figures/Figure4_reef_effectsize_H.pdf', Figure4,
+       width=166, height=140, unit='mm')
