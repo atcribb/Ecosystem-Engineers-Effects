@@ -1,10 +1,12 @@
-# Marine Phanerozoic biodiversity increases in presence of ecosystem engineers
+# Marine Phanerozoic biodiversity increased in presence of ecosystem engineers
 
-ANalyses associated with the manuscript "Marine Phanerozoic biodiversity increases in presence of ecosystem engineers" by AT Cribb, SAF Darroch, and W Gearty. <b>This manuscript is currently in preparation. Do not use the scripts without contacting me first.</b>
+<a href="https://doi.org/10.21203/rs.3.rs-5447601/v1"><img src="https://img.shields.io/badge/Download preprint here!-ffb703"></a>
+
+Analyses associated with the manuscript "Marine Phanerozoic biodiversity increased in presence of ecosystem engineers" by AT Cribb, SAF Darroch, and W Gearty. <b>This manuscript is currently in revision and is in the process of being updated in accordance with reviewer suggestions. Do not use the scripts without contacting me first.</b>
 
 Contact: A.T.Cribb@soton.ac.uk
 
-<img src="https://img.shields.io/badge/README%20is%20under%20construction-ff5400"> <img src="https://img.shields.io/badge/unpublished:-in_prep-7678ed">
+<img src="https://img.shields.io/badge/README%20is%20under%20construction-ff5400"> <img src="https://img.shields.io/badge/unpublished:-in revision-7678ed"> <a href="https://doi.org/10.5281/zenodo.14196644"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.14196644.svg" alt="DOI"></a>
 
 This repository contains all data and R scripts neede to reproduce the analyses and figures in the manuscript main text and suppelementary materials. You should run the analyses to generate new Output files in the Output folder created here. If you download this repository, set it as your working directory and everything should run smoothly. Should you have any questions or problems, or if you wish to make modifications for your own publication, please contact me at the email address above.
 
@@ -23,7 +25,7 @@ There are two sets of <kbd>[Analyses](https://github.com/atcribb/Ecosystem-Engin
 * ``EffectSize_Bioturbation.R`` - calculates Hedges g effect sizes for bioturbation on biodiversity 
 * ``EffectSize_Reefs.R`` - calculates Hedges g effect size for reef-buidlers on biodiversity
 * Both of these scripts contain three different subsampling protocols based on how or if formations are subsampled. By default, these are set to 20 occurrences per formation beacuse that is what is used in the main analysis, but by un-commenting either of the other two options and the corresponding file save line at the end of the script, you can run the analyses with the other two subsampling methods we test. You will need to do all three for the sampling biases analyses. Save all data to your /Output folder that you created in your working repository.
-* Also, note that these scripts calculate richness, Shannon's Diversity (H), and Simpson's Dominance. Only Shannon's Diversity is discussed in the manuscript, because it accounts for both richness and evenness together, but we have left each diversity metric in for an interested users. 
+* Also, note that these scripts calculate richness, Shannon's Diversity (H), and Simpson's Dominance. Only Shannon's Diversity is discussed in the manuscript, because it accounts for both richness and evenness together, but we have left each diversity metric in for any interested users. 
 * ``Biodiversity_bioturbators.R`` - calculates 1. a gloabl generic richness curve of bioturbators, and 2. the number of genera whose FAD are in each stage. Data is subsampled to 150 occurrences per formation, which requires the removal of stages that do not meet that occurrence quota. 
 * ``Biodiversity_reefs.R`` - the same thing as above, but for reef-builders.
 
@@ -47,6 +49,11 @@ There are twelve scripts needed to produce the supplementary figures:
 * ``Figures_Correaltes_Climate.R`` - uses the effect size outputs and the Scotese et al. (2021) GATs to assess global temperature as a predictor of effect sizes to create Figure 6. 
 
 # Change log
+### 10 February 2025
+``` diff
++ starting revision process
+```
+
 ### 29 October 2024
 ```diff
 + add diversity and climate correlate analyses
