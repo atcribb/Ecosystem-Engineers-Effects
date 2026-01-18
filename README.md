@@ -48,10 +48,9 @@ There are twelve scripts needed to produce the supplementary figures:
 * ``Figures_MassExtinctions.R`` - subsets and replots data for each mass extinction to create Figure 3
 * ``Figures_Correlates_Diversity.R`` - uses the effect size outputs and ecosystem engineer diveristy outputs to create Figure 4 and Figure 5
 * ``Figures_Correaltes_Climate.R`` - uses the effect size outputs and the Scotese et al. (2021) GATs to assess global temperature as a predictor of effect sizes to create Figure 6.
-* ``Supplementary_All_EffectSize.R`` - supplementary figure showing effect size results if bioturbation and reef-builders are pooled together
 * ``Supplementary_Compare_Subsampling.R`` - supplementary figure comparing effect sizes between formation-based and equal area grid cell-based spatial subsampling approaches 
 * ``PlottingOutput_Supplementals.R`` - all other supplementary figure plotting scripts
-
+  
 # Change log
 ### 18 January
 ``` diff
