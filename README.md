@@ -38,6 +38,7 @@ There are twelve scripts needed to produce the supplementary figures:
 * ``EffectSize_Bioturbators_RemoveEEs.R`` and ``EffectSize_Reefs_RemoveEEs.R`` - effect size analyses if ecosystem engineers are removed from calculation of diversity metrics 
 * ``Bioturbation_SamplingBiases.R`` - used to determine which formation subsampling method best reduces biases of sampling effort on effect sizes for bioturbators 
 * ``Reef_SamplingBiases.R`` - uesd to determine which formation subsampling method best reduces biases of sampling effort on effect sizes for reef-builders
+* ``EffectSize_Bioturbation_SpatialSubsampling.R`` and ``EffectSize_Reefs_SpatialSubsampling.R`` - Effect size analyses using alternate equal-area grid normalization subsampling technique, as described in the methods section.
 * These analyses will reproduce supplemenetal figures x and y. You need to have run all three subsampling versions of the effect size analyses to use the sampling biases analyses scripts. 
 
 ## Plotting outputs 
@@ -46,9 +47,19 @@ There are twelve scripts needed to produce the supplementary figures:
 * ``Figures_Reef_EffectSizes.R`` - plotting outputs for Figure 2 comparing biodiversity measurements per formation with and without reef-builders in each stage and effect size of the presence of reef-builders in each stage.
 * ``Figures_MassExtinctions.R`` - subsets and replots data for each mass extinction to create Figure 3
 * ``Figures_Correlates_Diversity.R`` - uses the effect size outputs and ecosystem engineer diveristy outputs to create Figure 4 and Figure 5
-* ``Figures_Correaltes_Climate.R`` - uses the effect size outputs and the Scotese et al. (2021) GATs to assess global temperature as a predictor of effect sizes to create Figure 6. 
+* ``Figures_Correaltes_Climate.R`` - uses the effect size outputs and the Scotese et al. (2021) GATs to assess global temperature as a predictor of effect sizes to create Figure 6.
+* ``Supplementary_All_EffectSize.R`` - supplementary figure showing effect size results if bioturbation and reef-builders are pooled together
+* ``Supplementary_Compare_Subsampling.R`` - supplementary figure comparing effect sizes between formation-based and equal area grid cell-based spatial subsampling approaches 
+* ``PlottingOutput_Supplementals.R`` - all other supplementary figure plotting scripts
 
 # Change log
+### 18 January
+``` diff
++ updated cleaned datasets
++ uploading revision analyses: spatial subsampling, pooled ecosystem engineer analyses
++ uploading figure scripts for new supplemental figures 
+```
+
 ### 10 February 2025
 ``` diff
 + starting revision process
