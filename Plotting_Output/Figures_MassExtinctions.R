@@ -70,7 +70,7 @@ endTriassic_effects <- subset(MEfx_results, stage %in% endTriassic_stages)
 KPg_effects <- subset(MEfx_results, stage %in% KPg_stages)
 
 EOMEfx <- ggplot(data=endOrdovician_effects) +
-  geom_vline(aes(xintercept=440), col='#e76f51', size=0.5) +
+  geom_vline(aes(xintercept=444), col='#e76f51', size=0.5) +
   geom_hline(yintercept=c(-0.2,0.2), linetype='longdash', linewidth=0.25, color='gray70') +
   geom_hline(yintercept=c(-0.5,0.5), linetype='longdash', linewidth=0.25, color='gray50') +
   geom_hline(yintercept=c(-0.8,0.8), linetype='longdash', linewidth=0.25, color='gray30') +
@@ -93,7 +93,7 @@ EOMEfx <- ggplot(data=endOrdovician_effects) +
 EOMEfx
 
 EDMEfx <- ggplot(data=endDevonian_effects) +
-  geom_vline(aes(xintercept=365), col='#e76f51', size=0.5) +
+  geom_vline(aes(xintercept=371), col='#e76f51', size=0.5) +
   geom_hline(yintercept=c(-0.2,0.2), linetype='longdash', linewidth=0.25, color='gray70') +
   geom_hline(yintercept=c(-0.5,0.5), linetype='longdash', linewidth=0.25, color='gray50') +
   geom_hline(yintercept=c(-0.8,0.8), linetype='longdash', linewidth=0.25, color='gray30') +
