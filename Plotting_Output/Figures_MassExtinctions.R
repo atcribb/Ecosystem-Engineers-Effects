@@ -44,8 +44,13 @@ colnames(extinction_boundaries) <- c('bottom', 'top')
 load('Output/effectsizes_bioturbation_occsub.RData')
 load('Output/effectsizes_reefs_occsub.RData')
 
-bioturbation_results_df$stage <- factor(results_df$stage, levels=stage_names)
-reefs_results_df$period <- factor(results_df$period, levels=period_names)
+load("~/Desktop/Manucripts/EcosystemEngineering_Biodiversity/Output/effect_sizes/effectsizes_bioturbation_occsub_20240106.RData")
+load("~/Desktop/Manucripts/EcosystemEngineering_Biodiversity/Revision/Revision_1/Revision_analyses/Output/effectsizes_reefs_occsub_20252804.RData")
+bioturbation_results_df <- bioturbation_occsub_results_df
+reefs_results_df <- reefs_occsub_results_df
+
+# bioturbation_results_df$stage <- factor(bioturbation_results_df$stage, levels=stage_names)
+# reefs_results_df$period <- factor(reefs_results_df$period, levels=period_names)
 
 #combine
 biots_subset <- as.data.frame(cbind(bioturbation_results_df$stage, as.numeric(bioturbation_results_df$mid_ma),
@@ -70,7 +75,7 @@ endTriassic_effects <- subset(MEfx_results, stage %in% endTriassic_stages)
 KPg_effects <- subset(MEfx_results, stage %in% KPg_stages)
 
 EOMEfx <- ggplot(data=endOrdovician_effects) +
-  geom_vline(aes(xintercept=440), col='#e76f51', size=0.5) +
+  geom_vline(aes(xintercept=444), col='#e76f51', size=0.5) +
   geom_hline(yintercept=c(-0.2,0.2), linetype='longdash', linewidth=0.25, color='gray70') +
   geom_hline(yintercept=c(-0.5,0.5), linetype='longdash', linewidth=0.25, color='gray50') +
   geom_hline(yintercept=c(-0.8,0.8), linetype='longdash', linewidth=0.25, color='gray30') +
@@ -93,7 +98,7 @@ EOMEfx <- ggplot(data=endOrdovician_effects) +
 EOMEfx
 
 EDMEfx <- ggplot(data=endDevonian_effects) +
-  geom_vline(aes(xintercept=365), col='#e76f51', size=0.5) +
+  geom_vline(aes(xintercept=371.1), col='#e76f51', size=0.5) +
   geom_hline(yintercept=c(-0.2,0.2), linetype='longdash', linewidth=0.25, color='gray70') +
   geom_hline(yintercept=c(-0.5,0.5), linetype='longdash', linewidth=0.25, color='gray50') +
   geom_hline(yintercept=c(-0.8,0.8), linetype='longdash', linewidth=0.25, color='gray30') +
@@ -114,7 +119,7 @@ EDMEfx <- ggplot(data=endDevonian_effects) +
 EDMEfx
 
 EPMEfx <- ggplot(data=endPermian_effects) +
-  geom_vline(aes(xintercept=252), col='#e76f51', size=0.5) +
+  geom_vline(aes(xintercept=251.9), col='#e76f51', size=0.5) +
   geom_hline(yintercept=c(-0.2,0.2), linetype='longdash', linewidth=0.25, color='gray70') +
   geom_hline(yintercept=c(-0.5,0.5), linetype='longdash', linewidth=0.25, color='gray50') +
   geom_hline(yintercept=c(-0.8,0.8), linetype='longdash', linewidth=0.25, color='gray30') +
@@ -176,6 +181,6 @@ KPgMEfx <- ggplot(data=KPg_effects) +
   theme(legend.position='none')
 KPgMEfx
 
-ME_effects <- ggarrange(EOMEfx, EDMEfx, EPMEfx, ETMEfx, KPgMEfx, ncol=2)
+ME_effects <- ggarrange2(EOMEfx, EDMEfx, EPMEfx, ETMEfx, KPgMEfx, ncol=2)
 
 
