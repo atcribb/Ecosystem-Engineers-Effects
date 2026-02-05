@@ -10,6 +10,32 @@ Contact: A.T.Cribb@soton.ac.uk
 
 This repository contains all data and R scripts neede to reproduce the analyses and figures in the manuscript main text and suppelementary materials. You should run the analyses to generate new Output files in the Output folder created here. If you download this repository, set it as your working directory and everything should run smoothly. Should you have any questions or problems, or if you wish to make modifications for your own publication, please contact me at the email address above.
 
+> <i>Run times</i>: You can expect each effect size analysis with 1000 iterations to take up to 30 hours to complete. These analyses should work on any machine with R installed, but they have specifically been tested and run with an Apple M3 Pro chip (MacBook Pro) and 2.0 GHz Intel Xeon Gold 6138 processor (University of Southampton Iridis 5 HPC).
+
+## Packages and dependencies
+The following packages are used in this repository:
+* <a href="https://cran.r-project.org/web/packages/divDyn/index.html">``divDyn``</a>
+* <a href="https://cran.r-project.org/web/packages/terra/index.html">``terra``</a>
+* <a href="https://cran.r-project.org/web/packages/fANCOVA/index.html">``fANCOVA``</a>
+* <a href="https://cran.r-project.org/web/packages/ggplot2/index.html">``ggplot2``</a>
+* <a href="https://cran.r-project.org/web/packages/deeptime/index.html">``deeptime``</a>
+* <a href="https://cran.r-project.org/web/packages/wesanderson/index.html">``wesanderson``</a>
+
+There is a library() line to load each package in relevant scripts. If you have not installed the packages beforehand, you can run the following:
+```
+install.packages('divDyn', 'terra', 'fANCOVA', 'ggplot2', 'deeptime', 'wesanderson')
+```
+
+Additionally, we used the packages <a href="https://cran.r-project.org/web/packages/tidyverse/index.html">``tidyverse``</a> and <a href="https://cran.r-project.org/web/packages/palaeoverse/index.html">``palaeoverse``</a> to prepare data.
+
+Note that deeptime and divDyn both use datasets of the same name. In plotting output scripts, this can cause errors if you are not careful, so you may find it is easiest to detach divDyn:
+```
+detach('package:divDyn', unload=TRUE)
+```
+
+Finally, note that if you are installing terra from source code (for example, if you plan to run these analyses on your institutional HPC), you will likely also need to install GDAL and PROJ. Please refer to <a href="https://github.com/rspatial/terra">``rspatial/terra``</a> for more information.
+
+
 ## Datasets
 There are three .RData files in <kbd>[Data](https://github.com/atcribb/Ecosystem-Engineers-Biodiversity/tree/main/Data)</kbd>:
 * ``Bioturbators_data.RData`` - contains the bioturbator ecosystem engineering data
@@ -52,6 +78,12 @@ There are twelve scripts needed to produce the supplementary figures:
 * ``PlottingOutput_Supplementals.R`` - all other supplementary figure plotting scripts
   
 # Change log
+### 5 February
+``` diff
++ packages and dependences
++ run times and machines 
+```
+
 ### 18 January
 ``` diff
 + updated cleaned datasets
