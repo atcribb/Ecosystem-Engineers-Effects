@@ -11,12 +11,14 @@ Contact: A.T.Cribb@soton.ac.uk
 This repository contains all data and R scripts neede to reproduce the analyses and figures in the manuscript main text and suppelementary materials. You should run the analyses to generate new Output files in the Output folder created here. If you download this repository, set it as your working directory and everything should run smoothly. Should you have any questions or problems, or if you wish to make modifications for your own publication, please contact me at the email address above.
 
 ## Datasets
-There are three .RData files in <kbd>[Data](https://github.com/atcribb/Ecosystem-Engineers-Biodiversity/tree/main/Data)</kbd>:
+There are three main .RData files in <kbd>[Data](https://github.com/atcribb/Ecosystem-Engineers-Biodiversity/tree/main/Data)</kbd>:
 * ``Bioturbators_data.RData`` - contains the bioturbator ecosystem engineering data
 * ``Reef_Ecosystem_Engineers_Final.RData`` - contains the reef-builder ecosystem engineering data
 * ``Phanerozoic_clean_final.Rdata`` - contains the cleaned and stratigraphically binned (largely following Kocsis et al. 2019 ddPhanero protocol with additional cleaning of formation data) Phanerozoic data. The raw PBDB data was downloaded 1 November 2023. Using this dataset will reproduce the figures in the paper. 
 
 There is also a ``scotese_climate`` folder that contains a .csv file ``Scotese-2021_GATs1Myr.csv``. These are global average temperatures for every one million years over the Phanerozoic extracted from <a href="https://doi.org/10.1016/j.earscirev.2021.103503"><b>Scotese et al. (2021) Phanerozoic paleotemperatures: The earth's changing climate during the last 540 million years</b></a>. Please do not use this data without also appropriately citing Scotese et al. (2021). 
+
+Finally, in a ``supplementary_source_data`` folder are two datasets, ``cell_threshold_all_data.RData`` and ``formation_threshold_all_data.RData``. These are needed to conduct the 'threshold tests' to generate Supplementary Figure 11. For these datasets, fossil occurrenced were removed from undersampled regions (in each each, formations or equal area grid cells which contain fewer than 20 fossil occurrences).
 
 ## Analyses
 There are two sets of <kbd>[Analyses](https://github.com/atcribb/Ecosystem-Engineers-Biodiversity/tree/main/Data)</kbd>: the main effect text analyses, and the supplemental analyses.
@@ -30,7 +32,7 @@ There are two sets of <kbd>[Analyses](https://github.com/atcribb/Ecosystem-Engin
 * ``Biodiversity_reefs.R`` - the same thing as above, but for reef-builders.
 
 ### Supplementary analyses
-There are twelve scripts needed to produce the supplementary figures:
+There are fourteen scripts needed to produce the supplementary figures:
 * ``EffectSize_Bioturbation_Bathymetry_Deep.R`` and ``EffectSize_Reefs_Bathymetry_Deep.R`` - Effect size analyses for only deep marine palaeoenvironments
 * ``EffectSize_Bioturbation_Bathymetry_Shallow.R`` and ``EffectSize_Reefs_Bathymetry_Shallow.R`` - Effect size analyses for only shallow marine palaeoenvironments
 * ``EffectSize_Bioturbation_Environment_Carbonate.R`` and ``EffectSize_Reefs_Environment_Carbonate.R`` - Effect size analyses for only carbonate facies
@@ -38,8 +40,8 @@ There are twelve scripts needed to produce the supplementary figures:
 * ``EffectSize_Bioturbators_RemoveEEs.R`` and ``EffectSize_Reefs_RemoveEEs.R`` - effect size analyses if ecosystem engineers are removed from calculation of diversity metrics 
 * ``Bioturbation_SamplingBiases.R`` - used to determine which formation subsampling method best reduces biases of sampling effort on effect sizes for bioturbators 
 * ``Reef_SamplingBiases.R`` - uesd to determine which formation subsampling method best reduces biases of sampling effort on effect sizes for reef-builders
-* ``EffectSize_Bioturbation_SpatialSubsampling.R`` and ``EffectSize_Reefs_SpatialSubsampling.R`` - Effect size analyses using alternate equal-area grid normalization subsampling technique, as described in the methods section.
-* These analyses will reproduce supplemenetal figures x and y. You need to have run all three subsampling versions of the effect size analyses to use the sampling biases analyses scripts. 
+* ``EffectSize_Bioturbation_SpatialSubsampling.R`` and ``EffectSize_Reefs_SpatialSubsampling.R`` - Effect size analyses using alternate equal-area grid normalization subsampling technique, as described in the methods section. These analyses will reproduce supplemenetal figures 9 and 10. You need to have run all three subsampling versions of the effect size analyses to use the sampling biases analyses scripts. 
+* There are not scripts for the threshold tests that re-produce supplemental figure 11, because the analysis is the same as the effect sizes in the main text. To run this analysis, load in the two datasets from ``Data/supplementary_source_data`` instead of the full datasets.
 
 ## Plotting outputs 
 * By default, the plotting output scripts are set to use the results from subsampling 20 occurrences per formation, as this is what is used in the main text. Change what file you load if you want to see results for different subsampling methods.
@@ -49,62 +51,5 @@ There are twelve scripts needed to produce the supplementary figures:
 * ``Figures_Correlates_Diversity.R`` - uses the effect size outputs and ecosystem engineer diveristy outputs to create Figure 4 and Figure 5
 * ``Figures_Correaltes_Climate.R`` - uses the effect size outputs and the Scotese et al. (2021) GATs to assess global temperature as a predictor of effect sizes to create Figure 6.
 * ``Supplementary_Compare_Subsampling.R`` - supplementary figure comparing effect sizes between formation-based and equal area grid cell-based spatial subsampling approaches 
+* ``PlottingOutput_CompareThresholds.R`` - supplementary figure comparing effect size results using a subset of the original source dataset that removes fossil occurrences from undersampled regions.
 * ``PlottingOutput_Supplementals.R`` - all other supplementary figure plotting scripts
-  
-# Change log
-### 18 January
-``` diff
-+ updated cleaned datasets
-+ uploading revision analyses: spatial subsampling, pooled ecosystem engineer analyses
-+ uploading figure scripts for new supplemental figures 
-```
-
-### 10 February 2025
-``` diff
-+ starting revision process
-```
-
-### 29 October 2024
-```diff
-+ add diversity and climate correlate analyses
-+ add all supplementary effect size analyses variations 
-+ add new main text figure plotting output scripts 
-+ add supplemental figure plotting output scripts
-```
-
-### 1-3 June 2024
-```diff
-+ Update bioturbation dataset to include a small number of infauna which were not previously included 
-+ Update sampling bias analysis scripts to plot but linear and polynomial regressions more easily 
-```
-
-### 30 May 2024
-```diff
-+ Minor edits to plotting aesthetics, and fixing issue where effect sizes strength was not being assessed based on uncertainty bounds
-```
-
-### 28 May 2024
-```diff
--  remove weighed means/standard deviation because of lack of ability to consistently apply in each stage - with large iter, more likely to deal with n1=1 in stages where EEs are not dominant, where sd and thereby weighted means/sd cannot be calculated. Switching back to unweighted mean and standard deviation to opt for consistency. None of this impacts Hedges g.
-```
-
-### 15 May 2024
-```diff
-+ update effect size analyses to calculate weighted means and standard deviations for generic richness and Shannon's Diversity
-- remove AIC tests from sampling biases analyses
-```
-
-### 25 April 2024
-```diff
-+ upload full PBBD dataset
-+ update README to reflect new dataset upload
-+ update README for Analyses and Plotting_Output
-- remove DataClean in lieu of uploading PBDB data
-```
-
-### 4 April 2024
-```diff
-+ writing the README
-+ uploading Analyses scripts
-```
-
