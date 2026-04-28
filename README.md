@@ -42,7 +42,7 @@ There are fourteen scripts needed to produce the supplementary figures:
 * ``EffectSize_Bioturbation_SpatialSubsampling.R`` and ``EffectSize_Reefs_SpatialSubsampling.R`` - Effect size analyses using alternate equal-area grid normalization subsampling technique, as described in the methods section. These analyses will reproduce supplemenetal figures 9 and 10. You need to have run all three subsampling versions of the effect size analyses to use the sampling biases analyses scripts. 
 * There are not scripts for the threshold tests that re-produce supplemental figure 11, because the analysis is the same as the effect sizes in the main text. To run this analysis, load in the two datasets from ``Data/supplementary_source_data`` instead of the full datasets.
 
-## Plotting outputs 
+### Plotting outputs 
 * By default, the plotting output scripts are set to use the results from subsampling 20 occurrences per formation, as this is what is used in the main text. Change what file you load if you want to see results for different subsampling methods.
 * ``Figures_Bioturbation_EffectSizes.R`` - plotting outputs for Figure 1 comparing biodiversity measurements per formation with and without bioturbators in each stage and effect size of the presence of bioturbators in each stage. 
 * ``Figures_Reef_EffectSizes.R`` - plotting outputs for Figure 2 comparing biodiversity measurements per formation with and without reef-builders in each stage and effect size of the presence of reef-builders in each stage.
@@ -52,3 +52,6 @@ There are fourteen scripts needed to produce the supplementary figures:
 * ``Supplementary_Compare_Subsampling.R`` - supplementary figure comparing effect sizes between formation-based and equal area grid cell-based spatial subsampling approaches 
 * ``PlottingOutput_CompareThresholds.R`` - supplementary figure comparing effect size results using a subset of the original source dataset that removes fossil occurrences from undersampled regions.
 * ``PlottingOutput_Supplementals.R`` - all other supplementary figure plotting scripts
+
+### Output files
+Running the R scripts in ```Analyses``` will generate all of the necessary .RData files needed to reproduce the paper. We include <code>set.seed(541)</code> at the top of each analysis to ensure that reproduced outputs are exact. Note that if you want to run the same analysis and achieve different results, you should change or remove this. If, for whatever reason, you require our exact output files, we also include them in ``Output/Original_outputs``.
