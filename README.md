@@ -1,8 +1,7 @@
-# Marine Phanerozoic biodiversity increased in presence of ecosystem engineers
-
+# Marine biodiversity was greater in the presence of ecosystem engineers throughout the Phanerozoic
 <a href="https://doi.org/10.21203/rs.3.rs-5447601/v1"><img src="https://img.shields.io/badge/Download preprint here!-ffb703"></a>
 
-Analyses associated with the manuscript "Marine Phanerozoic biodiversity increased in presence of ecosystem engineers" by AT Cribb, SAF Darroch, and W Gearty. <b>This manuscript is currently in revision and is in the process of being updated in accordance with reviewer suggestions. Do not use the scripts without contacting me first.</b>
+Analyses associated with the manuscript "Marine biodiversity was greater in the presence of ecosystem engineers throughout the Phanerozoic" by AT Cribb, SAF Darroch, and W Gearty. <b>This manuscript is currently in revision and is in the process of being updated in accordance with reviewer suggestions. Do not use the scripts without contacting me first.</b>
 
 Contact: A.T.Cribb@soton.ac.uk
 
